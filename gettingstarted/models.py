@@ -9,7 +9,7 @@ class Verification(models.Model):
         ('Investor', 'Investor'),
         ('Partner', 'Partner')
     )
-    owner = models.ForeignKey(User,on_delete=models.CASCADE,related_name='verify',blank=True,null=True,unique=True)
+    owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='verify',blank=True,null=True,unique=True)
     title = models.CharField(max_length=200,null=True)
     date = models.DateField(null=True)
     number = models.IntegerField(null=True)
@@ -25,4 +25,3 @@ class Verification(models.Model):
     Pancard = models.ImageField(null=True,blank=True)
     Voterid = models.ImageField(null=True,blank=True)
     selfie = models.ImageField(null=True)
-    virificationdone = models.BooleanField(default=False)
