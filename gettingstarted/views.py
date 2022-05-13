@@ -9,7 +9,12 @@ from .models import Verification
 
 class GetStartedAPIView(viewsets.ModelViewSet):
     serializer_class = GetStartedSerializer
-    permission_classes = [IsAuthenticated]
+    queryset = Verification.objects.all()
+    permission_classes = [AllowAny] #[IsAuthenticated]
+    # serializer_class = GetStartedSerializer
 
-    def get_queryset(self):
-        return self.request.user.verify.all()
+    # def get_queryset(self):
+    #     return self.request.user.verify.all()
+    
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)

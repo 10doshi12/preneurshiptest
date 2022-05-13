@@ -13,5 +13,3 @@ class GetStartedAPIView(viewsets.ModelViewSet):
 
     # def get_queryset(self):
     #     return self.request.user.verify.all()
-
-
