@@ -1,16 +1,16 @@
 from django.db import models
-from account.models import User
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class school_student(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='school',unique=True)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='school',unique=True)
     current_qualification = models.CharField(max_length=50)
     qualification_status = models.CharField(max_length=50)
     academy_name = models.CharField(max_length=50)
 
 class college_student(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='college',unique=True)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='college',unique=True)
     course_name = models.CharField(max_length=50)
     specification_in = models.CharField(max_length=50)
     collage_name = models.CharField(max_length=50)

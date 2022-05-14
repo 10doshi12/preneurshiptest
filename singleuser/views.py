@@ -9,15 +9,22 @@ class school_view(viewsets.ModelViewSet,):
     queryset = school_student.objects.all()
     permission_classes = [AllowAny] #[IsAuthenticated]
     serializer_class = school_serializer
-    # def get_queryset(self,owner1):
-    #     return school_student.objects.filter(owner=owner1).all()
+    def get_queryset(self):
+        return school_student.objects.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class college_view(viewsets.ModelViewSet):
-    queryset = college_student.objects.all()
-    permission_classes = [AllowAny] #[IsAuthenticated]
+    # queryset = college_student.objects.all()
+    permission_classes = [IsAuthenticated] #[AllowAny] #
     serializer_class = college_serializer
-    # def get_queryset(self):
-    #     return college_student.objects.all()
+    def get_queryset(self):
+        return college_student.objects.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class employed_view(viewsets.ModelViewSet):
@@ -25,7 +32,19 @@ class employed_view(viewsets.ModelViewSet):
     permission_classes = [AllowAny] #[IsAuthenticated]
     serializer_class = employed_serializer
 
+    def get_queryset(self):
+        return employed.objects.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 class configuration_view(viewsets.ModelViewSet):
     queryset = configuration_manage.objects.all()
     permission_classes = [AllowAny] #[IsAuthenticated]
     serializer_class = configuration_serializer
+
+    def get_queryset(self):
+        return configuration_manage.objects.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

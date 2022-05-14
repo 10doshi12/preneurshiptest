@@ -1,13 +1,15 @@
 
 from django.db import models
-from account.models import User
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
 class Portfolio(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE,related_name='portfolio')
     profile = models.ImageField(null=True)
-    companyname=models.TextField(null=True)
+    name_own = models.CharField(max_length=255,null=True,blank=True)
+    companyname=models.TextField(null=True,blank=True)
     desc=models.TextField(null=True,blank=True)
     pitch=models.TextField(null=True,blank=True)
 
@@ -19,4 +21,5 @@ class Portfolio(models.Model):
     owership=models.IntegerField(null=True,blank=True)
     dil_equity=models.IntegerField(null=True,blank=True)
     ls_equity_members=models.TextField(null=True,blank=True)
-    open_to_business = models.BooleanField(default=False)
+    open_to_investors = models.BooleanField(default=False)
+    open_to_partners = models.BooleanField(default=False)
