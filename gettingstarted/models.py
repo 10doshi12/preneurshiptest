@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 class Verification(models.Model):
     owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='verify',blank=True,null=True,unique=True)
-    title = models.CharField(max_length=200,null=True)
-    date = models.DateField(null=True)
-    number = models.IntegerField(null=True)
+    title = models.CharField(max_length=200,null=True,blank=True)
+    date = models.DateField(null=True,blank=True)
+    number = models.IntegerField(null=True,blank=True)
 
     profile = models.ImageField(null=True)
     companyname = models.TextField(null=True)
@@ -15,7 +15,7 @@ class Verification(models.Model):
     desc = models.TextField(null=True,blank=True)
     pitch = models.TextField(null=True,blank=True)
 
-    aadhar = models.FileField(null=True)
+    aadhar = models.FileField(null=True,blank=True)
     Pancard = models.ImageField(null=True,blank=True)
     Voterid = models.ImageField(null=True,blank=True)
-    selfie = models.ImageField(null=True)
+    selfie = models.ImageField(null=True,blank=True)
