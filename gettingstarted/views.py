@@ -20,7 +20,7 @@ class GetStartedAPIView(viewsets.ModelViewSet):
     # serializer_class = GetStartedSerializer
 
     def get_queryset(self):
-        return self.request.user.all()
+        return self.request.user.verify.all()
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
