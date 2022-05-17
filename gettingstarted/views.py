@@ -20,11 +20,18 @@ class GetStartedAPIView(viewsets.ModelViewSet):
     # serializer_class = GetStartedSerializer
 
     def get_queryset(self):
-        return self.request.user.verify.all()
+        return Verification.objects.filter(owner=self.request.user)
+
+    def get_object(self):
+        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        self.check_object_permissions(self.request, obj)
+        return obj
     
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
     
     def perform_update(self, serializer):
-        serializer.save(owner=self.request.user)
+        instance = self.get_object()  # instance before update
+        if self.request.user.is_authenticated:
+            serializer.save(owner=self.request.user)
 
