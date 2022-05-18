@@ -27,7 +27,7 @@ class configuration_manage(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='configure',blank=True,null=True)
     image = models.TextField(null=True,blank=True)
     name = models.CharField(max_length=255,blank=True,null=True)
-    mob_no = models.IntegerField(max_length=12,blank=True,null=True)
+    mob_no = models.IntegerField(blank=True,null=True)
     Email = models.EmailField(blank=True,null=True)
     add_skills = models.CharField(max_length=500,blank=True,null=True)
     bio = models.TextField(blank=True,null=True)
