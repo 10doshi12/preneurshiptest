@@ -28,14 +28,14 @@ class school_view(viewsets.ModelViewSet,):
 
 
 class college_view(viewsets.ModelViewSet):
-    # queryset = college_student.objects.all()
     permission_classes = [IsAuthenticated] #[AllowAny] #
     serializer_class = college_serializer
+    queryset = college_student.objects.all()
     def get_queryset(self):
         return college_student.objects.filter(owner=self.request.user)
     
     def get_object(self):
-        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        obj = get_object_or_404(self.queryset, owner=self.request.user)
         self.check_object_permissions(self.request, obj)
         return obj
     
@@ -49,15 +49,15 @@ class college_view(viewsets.ModelViewSet):
 
 
 class employed_view(viewsets.ModelViewSet):
-    # queryset = employed.objects.all()
     permission_classes = [IsAuthenticated] # [AllowAny] #
     serializer_class = employed_serializer
+    queryset = employed.objects.all()
 
     def get_queryset(self):
         return employed.objects.filter(owner=self.request.user)
     
     def get_object(self):
-        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        obj = get_object_or_404(self.queryset, owner=self.request.user)
         self.check_object_permissions(self.request, obj)
         return obj
     
@@ -70,15 +70,15 @@ class employed_view(viewsets.ModelViewSet):
             serializer.save(owner=self.request.user)
 
 class configuration_view(viewsets.ModelViewSet):
-    # queryset = configuration_manage.objects.all()
-    permission_classes = [AllowAny] #[IsAuthenticated]
+    permission_classes = [IsAuthenticated] 
     serializer_class = configuration_serializer
+    queryset = configuration_manage.objects.all()
 
     def get_queryset(self):
         return configuration_manage.objects.filter(owner=self.request.user)
     
     def get_object(self):
-        obj = get_object_or_404(self.get_queryset, owner=self.request.user)
+        obj = get_object_or_404(self.queryset, owner=self.request.user)
         self.check_object_permissions(self.request, obj)
         return obj
     
